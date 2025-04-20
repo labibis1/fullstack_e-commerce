@@ -27,28 +27,28 @@ import { ModeToggle } from "./mode-toggle";
 const Navbar = ({
   logo = {
     url: "#",
-    src: "https://shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
-    title: "HawaShop",
+    // src: "https://shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
+    src: "/public/favicon.png",
+    title: "EasyShop",
   },
   menu = [
     { title: "Home", url: "#" },
     {
-      title: "Products",
+      title: "Shop",
       url: "#",
     },
-    {
-      title: "Resources",
-      url: "#",
-    },
-    {
-      title: "Pricing",
-      url: "#",
-    },
-    {
-      title: "Blog",
-      url: "#",
-    },
+    // {
+    //   title: "Resources",
+    //   url: "#",
+    // },
+    // {
+    //   title: "Pricing",
+    //   url: "#",
+    // },
+    // {
+    //   title: "Blog",
+    //   url: "#",
+    // },
   ],
   auth = {
     login: { title: "Login", url: "#" },
@@ -57,7 +57,7 @@ const Navbar = ({
 }) => {
   return (
     <section className="py-4">
-      <div className="container mx-auto">
+      <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -89,12 +89,17 @@ const Navbar = ({
           </div>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* ......................Mobile Menu .............................*/}
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="max-h-8" alt={logo.alt} />
+              <img
+                src="/public/favicon.png"
+                className="max-h-8"
+                alt={logo.alt}
+              />
+              <h2 className="font-bold">EasyShop</h2>
             </a>
             <Sheet>
               <SheetTrigger asChild>
