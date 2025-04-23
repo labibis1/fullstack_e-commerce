@@ -5,12 +5,15 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import App from "./App";
 import Rootlayout from "./components/Rootlayout";
 import { ThemeProvider } from "@/components/theme-provider";
+import Shop from "./Pages/Shop";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
   <Route path="/" element={<Rootlayout />}>
+
     <Route index element={<App />}></Route>
-    <Route path="/shop" element={<h1>Shop</h1>}></Route>
+    <Route path="/shop" element={<Shop />}></Route>
+
   </Route>)
 );
 

@@ -11,32 +11,32 @@ import {
 const Categories = () => {
   const allcategories = [
     {
-      name: "laptop",
+      name: "Laptop",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },
     {
-      name: "laptop",
+      name: "Desktop",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },
     {
-      name: "laptop",
+      name: "Monitor",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },
     {
-      name: "laptop",
+      name: "Processor",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },
     {
-      name: "laptop",
+      name: "Mobile",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },
     {
-      name: "laptop",
+      name: "Headphones",
       image:
         "https://img.drz.lazcdn.com/static/bd/p/a2a65a358d9025938077b52f7263512a.jpg_720x720q80.jpg_.webp",
     },

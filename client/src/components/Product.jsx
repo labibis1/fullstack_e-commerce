@@ -23,7 +23,7 @@ export default function Product() {
       </figure>
       <div className="flex justify-between">
         <div>
-          <h3 className="text-lg">
+          <h3 className="text-md  lg:text-lg">
             <a href={product.href}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.name}
