@@ -176,9 +176,9 @@ const Shop = () => {
                 </Button>
               )}
 
-              <div className="grid  grid-cols-2 lg:grid-cols-3 gap-5  ">
+              <div className="grid grid-cols-3 ">
                 {showAllProducts && (
-                  <Paginate allProducts={allProducts} itemsPerPage={4} />
+                  <Paginate  allProducts={allProducts} itemsPerPage={3} />
                 )}
               </div>
             </div>

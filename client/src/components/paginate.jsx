@@ -42,8 +42,8 @@ const Paginate = ({ itemsPerPage, allProducts }) => {
     <>
       <Items currentItems={currentItems} />
       <ReactPaginate
-      className="flex gap-3 items-center"
-      pageClassName="border border-gray-500 px-2 cursor-pointer"
+        className="flex gap-3 items-center mt-10 "
+        pageClassName="border border-gray-500 px-2 cursor-pointer"
         breakLabel="..."
         nextLabel=">"
         onPageChange={handlePageClick}
@@ -52,7 +52,6 @@ const Paginate = ({ itemsPerPage, allProducts }) => {
         previousLabel="<"
         renderOnZeroPageCount={null}
         activeClassName=" bg-black text-white dark:bg-white dark:text-black"
-        
       />
     </>
   );

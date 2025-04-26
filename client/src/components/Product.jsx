@@ -1,34 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { HeartIcon, PlusIcon } from "lucide-react";
+import { Link } from "react-router";
 
 const product = {
   name: "Red Hat",
-  href: "#",
   image: "https://bundui-images.netlify.app/products/04.jpeg",
   price: "$28",
   category: "Clothing",
 };
 export default function Product({ productinfo }) {
-  console.log(productinfo);
   return (
     <div className=" xl:w-[300px] group relative space-y-4 shadow-md rounded-md dark:border-2 p-4  rounded-5">
       <figure className="group-hover:opacity-90">
-        <img
+       <Link   >
+       <img
           className="w-full rounded-lg aspect-square"
           src={
             productinfo
               ? productinfo.thumbnail
               : "https://bundui-images.netlify.app/products/04.jpeg"
           }
+          alt={productinfo && productinfo.title}
         />
+       </Link>
+        
       </figure>
       <div className="flex justify-between">
         <div>
           <h3 className="text-md  lg:text-lg">
-            <a href={product.href}>
+            {/* Ami chacchilam sudhu image er opore click korle
+            kaj korbe. Shop page er add to card a click kora jacche na
+          je kono jaygay click korle singleproduct route a niye jacche.
+          add to cart a click korle ekhen theke cart a add korte chai */}
+            <Link to={`/singleproduct/${productinfo && productinfo.id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
-              {productinfo && productinfo.title.slice(0,29)}
-            </a>
+              {productinfo && productinfo.title.slice(0,30)}
+            </Link>
           </h3>
           <p className="text-sm text-muted-foreground">
             {productinfo && productinfo.category}

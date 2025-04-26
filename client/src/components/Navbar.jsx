@@ -1,4 +1,6 @@
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Link } from "react-router";
+
 
 import {
   Accordion,
@@ -23,7 +25,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./mode-toggle";
-import { Link } from "react-router";
 
 const Navbar = ({
   logo = {
@@ -36,7 +37,7 @@ const Navbar = ({
     { title: "Home", url: "/" },
     {
       title: "Shop",
-      url: "shop",
+      url: "/shop",
     },
     // {
     //   title: "Resources",
@@ -52,8 +53,8 @@ const Navbar = ({
     // },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Sign up", url: "/signup" },
   },
 }) => {
   return (
@@ -79,10 +80,10 @@ const Navbar = ({
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
+              <Link to={auth.login.url}>{auth.login.title}</Link>
             </Button>
             <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.title}</a>
+              <Link to={auth.signup.url}>{auth.signup.title}</Link>
             </Button>
             {/* ......... dark more for desktop......... */}
 
