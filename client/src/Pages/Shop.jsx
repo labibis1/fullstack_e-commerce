@@ -59,7 +59,7 @@ const Shop = () => {
   useEffect(() => {
     function getAllproducts() {
       axios
-        .get("https://dummyjson.com/products")
+        .get("https://localhost:3000/product/products")
         .then((res) => {
           setSlicesProduct(res.data.products.slice(0, 6));
           setAllproducts(res.data.products);
