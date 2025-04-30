@@ -6,13 +6,18 @@ const SingleProduct = ({}) => {
   let { id } = useParams();
   console.log(id);
   const [sinleProduct, setSingleProduct] = useState({});
+  const [productImage, setProductImage] = useState([]);
+  const [productImgindex, setproductImgindex] = useState(2);
   useEffect(() => {
     function getSingleProduct() {
       axios
-        .get(`https://dummyjson.com/products/${id}`)
+        .get(`http://localhost:3000/product/singleproduct/${id}`)
 
         .then((res) => {
-          setSingleProduct(res.data);
+          console.log(res.data);
+
+          setSingleProduct(res.data.data);
+          setProductImage(res.data.data.image);
         })
         .catch((err) => {
           console.log(err);
@@ -20,24 +25,57 @@ const SingleProduct = ({}) => {
     }
     getSingleProduct();
   }, []);
-  console.log(sinleProduct);
+
+  const handleImageIndex = (i) => {
+    {
+      setproductImgindex(i);
+    }
+  };
+
   return (
     <div>
       <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
         <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-            <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
-              <img className="w-full" src={sinleProduct.thumbnail} alt="" />
+            <div className=" max-w-md lg:max-w-lg sm:max-w-sm mx-auto ">
+              <div className="w-[450px] ">
+                <img src={productImage[productImgindex]} />
+              </div>
+
+              <div className="flex  w-[80px] h-[80px] mt-3  gap-3   ">
+                {productImage.map((allimage, index) => (
+                  <img
+                    onClick={() => handleImageIndex(index)}
+                    className="w-full"
+                    src={allimage}
+                  />
+                ))}
+              </div>
             </div>
             <div className="mt-6 sm:mt-8 lg:mt-0">
               <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                 {sinleProduct.title}
               </h1>
-              <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
-                <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                  ${sinleProduct.price}
-                </p>
-                <div className="flex items-center gap-2 mt-2 sm:mt-0">
+              <div className="mt-4 sm:items-center sm:gap-4 ">
+                <div className="flex gap-5">
+                  <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
+                    ৳{sinleProduct.discountprice}
+                  </p>
+                  <del className="text-2xl font-extrabold text-gray-400 sm:text-3xl dark:text-gray-500">
+                    ৳{sinleProduct.sellingprice}
+                  </del>
+                </div>
+               
+                <div className="mt-5">
+                  <p className="mb-3 text-gray-800 dark:text-gray-400">
+                    Stock: {sinleProduct.stock}
+                  </p>
+                  <p className="mb-3 text-gray-800 dark:text-gray-400">
+                    Color: {sinleProduct.color}
+                  </p>
+                </div>
+                {/* Rating and review */}
+                {/* <div className="flex items-center gap-2 mt-2 sm:mt-0">
                   <div className="flex items-center gap-1">
                     <svg
                       className="w-4 h-4 text-yellow-300"
@@ -104,7 +142,7 @@ const SingleProduct = ({}) => {
                   >
                     345 Reviews
                   </a>
-                </div>
+                </div> */}
               </div>
               <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
                 <a
@@ -135,7 +173,7 @@ const SingleProduct = ({}) => {
               </div>
               <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
               <p className="mb-6 text-gray-500 dark:text-gray-400">
-                {sinleProduct.description}{" "}
+                {sinleProduct.description}
               </p>
             </div>
           </div>

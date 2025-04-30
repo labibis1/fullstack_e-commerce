@@ -65,7 +65,7 @@ async function getAllproductController(req, res) {
 async function singleProductController(req, res) {
   let { id } = req.params;
   try {
-    let singleproduct = await productModel.findOne({ _id: id });
+    let singleproduct = await productModel.findOne({ _id: id }).populate("category")
     return res.status(200).json({
       success: true,
       msg: "single product fetch successful",
