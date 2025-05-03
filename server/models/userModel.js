@@ -21,7 +21,6 @@ const userSchema = new  Schema({
 
     phone: {
         type: String,
-        required: true,
         // unique: [true, "This phone number already exist in our system"]
     },
 

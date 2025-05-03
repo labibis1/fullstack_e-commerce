@@ -16,6 +16,9 @@ import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Otpverify from "./Pages/Otpverify";
+import store from "../store";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,14 +31,16 @@ const router = createBrowserRouter(
         <Route path="/checkout" element={<Checkout />}></Route>
       </Route>
       <Route path="/login" element={<Login />}></Route>
-      <Route path="/signup" element={< Signup />}></Route>
-
+      <Route path="/signup" element={<Signup />}></Route>
+      <Route path="/otp" element={<Otpverify />}></Route>
     </Route>
   )
 );
 
 createRoot(document.getElementById("root")).render(
-  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <RouterProvider router={router} />
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </Provider>
 );
