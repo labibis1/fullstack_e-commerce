@@ -1,6 +1,6 @@
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 import { Link } from "react-router";
-
+import { useSelector } from "react-redux";
 
 import {
   Accordion,
@@ -39,32 +39,22 @@ const Navbar = ({
       title: "Shop",
       url: "/shop",
     },
-    // {
-    //   title: "Resources",
-    //   url: "#",
-    // },
-    // {
-    //   title: "Pricing",
-    //   url: "#",
-    // },
-    // {
-    //   title: "Blog",
-    //   url: "#",
-    // },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
     signup: { title: "Sign up", url: "/signup" },
   },
 }) => {
+  const data = useSelector((state) => state.authSlice.value);
+  console.log(data);
   return (
     <section className="py-4">
       <div className="container">
-        {/* Desktop Menu */}
+        {/* ..................Desktop Menu........................... */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href={logo.url} className="flex items-center gap-2">
+            <Link to={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
               <span className="text-lg font-semibold tracking-tighter">
                 {logo.title}
@@ -78,17 +68,30 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <Link to={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link to={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
-            {/* ......... dark more for desktop......... */}
 
-            <ModeToggle />
-          </div>
+          {data ? (
+            <div className="flex gap-2 justify-center items-center">
+              {" "}
+              <h2 className="bg-gray-400 text-white text-sm px-4 py-2 rounded-md">
+                {" "}
+                {data.name}{" "}
+              </h2>
+              <ModeToggle />
+              <Button asChild variant="outline" size="sm">
+                <Link to={"/login"}>Logout</Link>
+              </Button>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <Button asChild variant="outline" size="sm">
+                <Link to={auth.login.url}>{auth.login.title}</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link to={auth.signup.url}>{auth.signup.title}</Link>
+              </Button>
+              {/* ......... dark more for desktop......... */}
+            </div>
+          )}
         </nav>
 
         {/* ......................Mobile Menu .............................*/}
@@ -117,13 +120,13 @@ const Navbar = ({
                 <SheetContent className="overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
+                      <Link to={"/"} className="flex items-center gap-2">
                         <img
                           src={logo.src}
                           className="max-h-8"
                           alt={logo.alt}
                         />
-                      </a>
+                      </Link>
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-6 p-4">
@@ -135,14 +138,26 @@ const Navbar = ({
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
 
-                    <div className="flex flex-col gap-3">
-                      <Button asChild variant="outline">
-                        <a href={auth.login.url}>{auth.login.title}</a>
-                      </Button>
-                      <Button asChild>
-                        <a href={auth.signup.url}>{auth.signup.title}</a>
-                      </Button>
-                    </div>
+                    {data ? (
+                      <div className="flex flex-col gap-3">
+                        <Button asChild variant="outline">
+                          <a>{data.name}</a>
+                        </Button>
+
+                        <Button asChild>
+                          <Link to={"/login"}>Logout</Link>
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-3">
+                        <Button asChild variant="outline">
+                          <a href={auth.login.url}>{auth.login.title}</a>
+                        </Button>
+                        <Button asChild>
+                          <a href={auth.signup.url}>{auth.signup.title}</a>
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </SheetContent>
               </Sheet>

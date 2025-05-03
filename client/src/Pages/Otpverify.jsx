@@ -8,16 +8,23 @@ import {
 } from "@/components/ui/input-otp";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { useNavigate } from "react-router";
 const Otpverify = () => {
   const data = useSelector((state) => state.authSlice.value?.payload);
   const [otp, setOtp] = useState(null);
-
+  const nevigate = useNavigate();
   const handleOtpSubmit = () => {
-    axios.post("http://localhost:3000/auth/verify-otp", {
-      email: data.email,
-      otp: otp,
-    })
+    axios
+      .post("http://localhost:3000/auth/verify-otp", {
+        email: data.email,
+        otp: otp,
+      })
+      .then((res) => {
+        nevigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -30,7 +37,7 @@ const Otpverify = () => {
                 <p className="text-black">Email Verification</p>
               </div>
               <div className="flex flex-row text-sm font-medium text-gray-400">
-                <p>We have sent a code to your email:  </p>
+                <p>We have sent a code to your email: <b>{data?.email}</b> </p>
               </div>
             </div>
             <div>

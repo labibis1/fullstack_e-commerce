@@ -11,7 +11,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -22,12 +22,10 @@ const Signup = () => {
         password,
       })
       .then((res) => {
-        console.log(res);
-          toast("Signup successful!");
-          dispatch(userLoginInfo(userLoginInfo(res.data.data))) 
-          navigate("/otp")
-
-  
+        localStorage.setItem("userdata", JSON.stringify(res.data.data));
+        toast("Signup successful!");
+        dispatch(userLoginInfo(userLoginInfo(res.data.data)));
+        navigate("/otp");
       })
       .catch((err) => {
         console.log(err);
