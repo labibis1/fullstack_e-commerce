@@ -1,18 +1,18 @@
 import React from "react";
-import { Link } from "react-router";
-import { Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router"; 
+import ProtectedRoute from "./ProtectedRoute";
 
 const Rootlayout = () => {
+  const navigate = useNavigate();
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("admin_token");
+    navigate("/login");
+  };
+
   const dashboardicon = (
-    <svg
-      className="w-6 h-6"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
+    <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <path
         stroke="currentColor"
         strokeLinejoin="round"
@@ -23,15 +23,7 @@ const Rootlayout = () => {
   );
 
   const overviewicon = (
-    <svg
-      className="w-6 h-6"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
+    <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <path
         stroke="currentColor"
         strokeLinecap="round"
@@ -42,15 +34,7 @@ const Rootlayout = () => {
   );
 
   const chaticon = (
-    <svg
-      className="w-6 h-6"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
+    <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <path
         stroke="currentColor"
         strokeLinecap="round"
@@ -68,32 +52,35 @@ const Rootlayout = () => {
   ];
 
   return (
-    <>
-      <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white transition-all duration-300">
+    <ProtectedRoute>
+      {/* Navbar */}
+      <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white">
         <Link to="/">
           <h1 className="text-2xl font-bold">EasyShop</h1>
         </Link>
         <div className="flex items-center gap-5 text-gray-500">
-          <p>Hi! Admin</p>
-          <button className="border rounded-full text-sm px-4 py-1">
+          <p>Hi! admin</p>
+          <button
+            onClick={handleLogout}
+            className="border rounded-full text-sm px-4 py-1 hover:bg-gray-100 transition"
+          >
             Logout
           </button>
         </div>
       </div>
 
-      {/* .................................... */}
+      {/* Sidebar + Main */}
       <div className="flex">
-        <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
+        <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col">
           {sidebarLinks.map((item, index) => (
             <Link
               to={item.path}
               key={index}
-              className={`flex items-center py-3 px-4 gap-3 
-                              ${
-                                index === 0
-                                  ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-indigo-500 text-indigo-500"
-                                  : "hover:bg-gray-100/90 border-white text-gray-700"
-                              }`}
+              className={`flex items-center py-3 px-4 gap-3 ${
+                index === 0
+                  ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-indigo-500 text-indigo-500"
+                  : "hover:bg-gray-100/90 border-white text-gray-700"
+              }`}
             >
               {item.icon}
               <p className="md:block hidden text-center">{item.name}</p>
@@ -102,11 +89,10 @@ const Rootlayout = () => {
         </div>
 
         <main>
-          
           <Outlet />
         </main>
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 

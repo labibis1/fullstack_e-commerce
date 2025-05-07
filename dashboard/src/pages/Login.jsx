@@ -1,8 +1,45 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  let baseurl = import.meta.env.VITE_API_URL;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const token = localStorage.getItem("admin_token");
+
+  let navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${baseurl}/auth/login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.data.data.role == "admin") {
+          localStorage.setItem("admin_token", JSON.stringify(res.data.token));
+          navigate("/");
+        } else {
+          alert("you are not an admin");
+        }
+        // console.log(res);
+      })
+      .catch((err) => {
+        console.log(err); 
+        alert("error")
+      });
+  };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+  
   return (
-    <section className="flex  justify-center items-center min-h-screen " > 
+    <section className="flex  justify-center items-center min-h-screen ">
       <form className="bg-white text-gray-500 max-w-[340px] w-full mx-4 md:p-6 p-4 py-8 text-left text-sm rounded-xl shadow-[0px_0px_10px_0px] shadow-black/10">
         <h2 className="text-2xl font-bold mb-9 text-center text-gray-800">
           Welcome Back
@@ -32,6 +69,7 @@ const Login = () => {
             />
           </svg>
           <input
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full outline-none bg-transparent py-2.5"
             type="email"
             placeholder="Email"
@@ -52,6 +90,7 @@ const Login = () => {
             />
           </svg>
           <input
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full outline-none bg-transparent py-2.5"
             type="password"
             placeholder="Password"
@@ -68,6 +107,7 @@ const Login = () => {
           </a>
         </div>
         <button
+          onClick={handleLogin}
           type="submit"
           className="w-full mb-3 bg-indigo-500 hover:bg-indigo-600/90 transition py-2.5 rounded text-white font-medium"
         >
