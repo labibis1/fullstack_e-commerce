@@ -4,6 +4,7 @@ const {
   LoginController,
   VerifyOtpController,
 } = require("../../config/controllers/authController");
+const verifyTokenController = require("../../config/controllers/verifyTokenController");
 const router = express.Router();
 
 // http://localhost:3000/auth/signup
@@ -19,5 +20,9 @@ router.post("/login", LoginController);
 
 // http://localhost:3000/auth/verify-otp
 router.post("/verify-otp", VerifyOtpController);
+
+// http://localhost:3000/auth/verify-token
+router.get("/verify-token", verifyTokenController)
+
 
 module.exports = router;
